@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import { getTrending } from 'services/api';
 
@@ -15,10 +14,10 @@ const Home = () => {
   return (
     <div>
       <ul>
-        {movies.map(({ title }) => {
+        {movies.map(({ title, id }) => {
           return (
-            <li key={nanoid()}>
-              <Link>{title}</Link>
+            <li key={id}>
+              <Link to={`/movies/${id}`}>{title}</Link>
             </li>
           );
         })}
