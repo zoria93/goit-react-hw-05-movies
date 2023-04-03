@@ -2,7 +2,6 @@ const baseUrl = 'https://api.themoviedb.org/3/';
 const KEY_API = 'a19b1687fe9e52121952a921faf7bb58';
 
 export const getTrending = async () => {
-  console.log(getTrending);
   const response = await fetch(`
 ${baseUrl}trending/movie/day?api_key=${KEY_API}`);
 
