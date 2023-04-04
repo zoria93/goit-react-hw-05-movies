@@ -1,12 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Suspense } from 'react';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getDetails } from 'services/api';
+import { Loader } from 'components/Loader/Loader';
+import {
+  Wrapper,
+  Div,
+  Text,
+  Title,
+  Button,
+  TextBtn,
+  List,
+  ImgDiv,
+  TextLink,
+  Item,
+} from 'pages/MovieDetails/MovieDetails.styled';
 import image from 'image/image.png';
 
 const MoviesDetails = () => {
   const [movies, setMovies] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     getDetails(movieId)
@@ -17,36 +32,50 @@ const MoviesDetails = () => {
 
   return (
     <>
-      <div>
-        <img
-          src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/w300${poster_path}`
-              : `${image}`
-          }
-          alt="poster"
-          width="300"
-          loading="lazy"
-        />
-        <h2>{title}</h2>
-        <p>User Score: {Math.round(vote_average * 10)}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <p>
-          {genres?.length &&
-            genres.map(({ id, name }) => <span key={id}>{name}, </span>)}
-        </p>
-      </div>
-      <ul>
+      <Button type="button">
+        <TextBtn to={backLinkHref}>GO BACK</TextBtn>
+      </Button>
+      <Wrapper>
+        <ImgDiv>
+          <img
+            src={
+              poster_path
+                ? `https://image.tmdb.org/t/p/w300${poster_path}`
+                : `${image}`
+            }
+            alt="poster"
+            width="300"
+            loading="lazy"
+          />
+        </ImgDiv>
+        <Div>
+          <Title>{title}</Title>
+          <Text>User Score: {Math.round(vote_average * 10)}%</Text>
+          <h3>Overview</h3>
+          <Text>{overview}</Text>
+          <h3>Genres</h3>
+          <Text>
+            {genres?.length &&
+              genres.map(({ id, name }) => <span key={id}>{name}, </span>)}
+          </Text>
+        </Div>
+      </Wrapper>
+      <List>
+        <h4>Additional information</h4>
         <li>
-          <Link to={`cast`}>Cast</Link>
+          <TextLink to={`cast`} state={{ from: backLinkHref }}>
+            Cast
+          </TextLink>
         </li>
-        <li>
-          <Link to={`reviews`}>Reviews</Link>
-        </li>
-      </ul>
-      <Outlet />
+        <Item>
+          <TextLink to={`reviews`} state={{ from: backLinkHref }}>
+            Reviews
+          </TextLink>
+        </Item>
+      </List>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

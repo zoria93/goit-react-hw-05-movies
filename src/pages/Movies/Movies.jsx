@@ -1,20 +1,30 @@
-import { Link } from 'react-router-dom';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getSearchMovies } from 'services/api';
+import { SearchInput, Button } from 'pages/Movies/Movies.styled';
+import { Item, Text, List } from 'pages/Movies/Movies.styled';
 
 const Movies = () => {
   const [name, setName] = useState('');
   const [movies, setMovies] = useState([]);
+  const [value, setValue] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
+  const location = useLocation();
 
   useEffect(() => {
     if (query === '') {
       return;
     }
     getSearchMovies(query)
-      .then(listMovies => setMovies(listMovies.results))
+      .then(listMovies => {
+        if (listMovies.results.length === 0) {
+          setValue(true);
+          return;
+        }
+        setMovies(listMovies.results);
+        setValue(false);
+      })
       .catch(error => console.log(error.message));
   }, [query]);
 
@@ -26,25 +36,35 @@ const Movies = () => {
     e.preventDefault();
     setSearchParams({ query: name });
     setName('');
+    setMovies([]);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} action="off">
-        <input type="text" value={name} onChange={handleChange} />
-        <button type="submit">Search</button>
+        <SearchInput
+          placeholder="Search movies..."
+          type="text"
+          value={name}
+          onChange={handleChange}
+        />
+        <Button type="submit">Search</Button>
       </form>
-
       {movies.length > 0 && (
         <ul>
           {movies.map(({ title, id }) => {
             return (
-              <li key={id}>
-                <Link to={`/movies/${id}`}>{title}</Link>
-              </li>
+              <List key={id}>
+                <Item to={`/movies/${id}`} state={{ from: location }}>
+                  {title}
+                </Item>
+              </List>
             );
           })}
         </ul>
+      )}
+      {value && (
+        <Text>There is no movies on your query! Please try again!</Text>
       )}
     </>
   );
