@@ -11,6 +11,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
   const location = useLocation();
+  console.log();
 
   useEffect(() => {
     if (query === '') {
@@ -62,6 +63,17 @@ const Movies = () => {
             );
           })}
         </ul>
+        // <ul>
+        //   {movies.map(({ kinopoisk_id, info: { ukr } }) => {
+        //     return (
+        //       <List key={nanoid()}>
+        //         <Item to={`/movies/${kinopoisk_id}`} state={{ from: location }}>
+        //           {ukr}
+        //         </Item>
+        //       </List>
+        //     );
+        //   })}
+        // </ul>
       )}
       {value && (
         <Text>There is no movies on your query! Please try again!</Text>

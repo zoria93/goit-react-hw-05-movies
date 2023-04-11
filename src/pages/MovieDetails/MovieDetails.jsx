@@ -15,10 +15,11 @@ import {
   TextLink,
   Item,
 } from 'pages/MovieDetails/MovieDetails.styled';
+import Player from 'components/Player/Player';
 import image from 'image/image.png';
 
 const MoviesDetails = () => {
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
@@ -28,6 +29,37 @@ const MoviesDetails = () => {
       .then(movieDetails => setMovies(movieDetails))
       .catch(error => console.log(error.message));
   }, [movieId]);
+
+  // const { ukr, screenshot } = movies.info ?? '';
+  // const { link } = movies ?? '';
+
+  // return (
+  //   <>
+  //     <Button type="button">
+  //       <TextBtn to={backLinkHref}>GO BACK</TextBtn>
+  //     </Button>
+  //     <Wrapper>
+  //       <ImgDiv>
+  //         <img src={screenshot} alt="poster" width="300" loading="lazy" />
+  //       </ImgDiv>
+  //       <Div>
+  //         <Title>{ukr}</Title>
+  //         <iframe
+  //           src={link}
+  //           height="300"
+  //           width="400"
+  //           title="Iframe Приклад"
+  //         ></iframe>
+  //         {/* <Text>User Score: {Math.round(vote_average * 10)}%</Text>
+  //         <h3>Overview</h3>
+  //         <Text>{description}</Text>
+  //         <h3>Genres</h3>
+  //         <Text>
+  //           {genres?.length &&
+  //             genres.map(({ id, name }) => <span key={id}>{name}, </span>)}
+  //         </Text> */}
+  //       </Div>
+  //     </Wrapper>
   const { title, vote_average, overview, genres, poster_path } = movies ?? '';
 
   return (
@@ -50,6 +82,7 @@ const MoviesDetails = () => {
         </ImgDiv>
         <Div>
           <Title>{title}</Title>
+          <Player title={movies.title} />
           <Text>User Score: {Math.round(vote_average * 10)}%</Text>
           <h3>Overview</h3>
           <Text>{overview}</Text>
