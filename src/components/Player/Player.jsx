@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { getSearchTitle } from 'services/api';
-import { nanoid } from 'nanoid';
 
 const Player = ({ title }) => {
   const [listMivies, setListMovies] = useState([]);

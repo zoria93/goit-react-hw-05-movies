@@ -10,7 +10,7 @@ const KEY_BAZON = `c69778ce88918520e7adb0dc758dbe37`;
 
 export const getTrending = async () => {
   const response = await fetch(`
-${baseUrl}trending/movie/day?api_key=${KEY_API}&language=uk`);
+${baseUrl}trending/movie/day?api_key=${KEY_API}&language=ru`);
 
   if (response.ok) {
     const listMovies = await response.json('');
@@ -21,7 +21,7 @@ ${baseUrl}trending/movie/day?api_key=${KEY_API}&language=uk`);
 
 export const getSearchMovies = async query => {
   const response = await fetch(`
-       ${baseUrl}search/movie?api_key=${KEY_API}&language=uk&query=${query}&page=1&include_adult=false
+       ${baseUrl}search/movie?api_key=${KEY_API}&language=ru&query=${query}&page=1&include_adult=false
     `);
   if (response.ok) {
     const query = await response.json('');
@@ -32,7 +32,7 @@ export const getSearchMovies = async query => {
 
 export const getDetails = async movieId => {
   const response = await fetch(
-    `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=uk`
+    `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=ru`
   );
   if (response.ok) {
     const movieDetails = await response.json('');
