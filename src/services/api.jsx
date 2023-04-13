@@ -8,9 +8,11 @@ const KEY_BAZON = `c69778ce88918520e7adb0dc758dbe37`;
 
 //bazon.cc/api/search?token=c69778ce88918520e7adb0dc758dbe37&kp=841738
 
+//api.themoviedb.org/3/search/keyword?api_key=c69778ce88918520e7adb0dc758dbe37&query=d&page=1
+
 export const getTrending = async () => {
   const response = await fetch(`
-${baseUrl}trending/movie/day?api_key=${KEY_API}&language=ru`);
+${baseUrl}trending/movie/week?api_key=${KEY_API}&language=ru`);
 
   if (response.ok) {
     const listMovies = await response.json('');

@@ -1,28 +1,17 @@
-import { useState, useEffect } from 'react';
-import { getSearchTitle } from 'services/api';
+import Iframe from 'react-iframe';
 
 const Player = ({ title }) => {
-  const [listMivies, setListMovies] = useState([]);
-  console.log(listMivies);
-
-  useEffect(() => {
-    if (!title) {
-      return;
-    }
-    getSearchTitle(title)
-      .then(movieQuery => setListMovies(movieQuery.results[0]))
-      .catch(error => console.log(error.message));
-  }, [title]);
-  const { link } = listMivies;
-
   return (
     <>
-      <iframe
-        src={link}
-        height="300"
-        width="400"
-        title="Iframe Приклад"
-      ></iframe>
+      <Iframe
+        url={`https://v1681339303.bazon.site/embed?search=${title}`}
+        width="640px"
+        height="320px"
+        id=""
+        className=""
+        display="block"
+        position="relative"
+      />
     </>
   );
 };
