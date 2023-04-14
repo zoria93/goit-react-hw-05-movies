@@ -19,7 +19,16 @@ const Player = () => {
 
   return (
     <>
-      <iframe
+      <Iframe
+        url={`https://v1681499138.bazon.site/embed?search=${title}`}
+        width="640px"
+        height="320px"
+        id=""
+        className=""
+        display="block"
+        position="relative"
+      />
+      {/* <iframe
         src={`https://v1681499138.bazon.site/embed?search=${title}`}
         frameborder="0"
         allowfullscreen=""
@@ -27,7 +36,7 @@ const Player = () => {
         width="800"
         height="452"
         title="iframe"
-      ></iframe>
+      ></iframe> */}
     </>
   );
 };
