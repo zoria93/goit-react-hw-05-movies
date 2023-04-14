@@ -18,7 +18,7 @@ const Player = () => {
   return (
     <>
       <Iframe
-        url={title}
+        url={`https://v1681494159.bazon.site/embed?search=${title}`}
         src={`https://v1681494159.bazon.site/embed?search=${title}`}
         width="640px"
         height="320px"
