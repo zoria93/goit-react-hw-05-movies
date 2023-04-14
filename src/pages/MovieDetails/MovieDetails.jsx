@@ -69,9 +69,7 @@ const MoviesDetails = ({ getName }) => {
         <ul>
           <li>
             <Link to={`player`} state={{ from: backLinkHref }}>
-              <button onClick={handleClik} type="click">
-                Player One
-              </button>
+              <button type="click">Player One</button>
             </Link>
           </li>
           <li>

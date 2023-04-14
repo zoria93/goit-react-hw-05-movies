@@ -26,7 +26,7 @@ export const App = () => {
           path="movies/:movieId"
           element={<MoviesDetails getName={getName} />}
         >
-          <Route path="player" element={<Player title={nameMovie} />} />
+          <Route path="player" element={<Player />} />
           <Route path="playerTwo" element={<PlayerTwo title={nameMovie} />} />
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
