@@ -1,21 +1,21 @@
 import Iframe from 'react-iframe';
-import { useEffect, useState } from 'react';
-// import { getSearchTitle } from 'services/api';
-import { getDetails } from 'services/api';
-import { useParams } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
+// // import { getSearchTitle } from 'services/api';
+// import { getDetails } from 'services/api';
+// import { useParams } from 'react-router-dom';
 
-const Player = () => {
+const Player = ({ title }) => {
   // console.log(title);
-  const [movies, setMovies] = useState([]);
-  const { movieId } = useParams();
+  // const [movies, setMovies] = useState([]);
+  // const { movieId } = useParams();
 
-  useEffect(() => {
-    getDetails(movieId)
-      .then(movieDetails => setMovies(movieDetails))
-      .catch(error => console.log(error.message));
-  }, [movieId]);
+  // useEffect(() => {
+  //   getDetails(movieId)
+  //     .then(movieDetails => setMovies(movieDetails))
+  //     .catch(error => console.log(error.message));
+  // }, [movieId]);
 
-  const { title } = movies ?? '';
+  // const { title } = movies ?? '';
 
   return (
     <>
