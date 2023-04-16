@@ -1,4 +1,4 @@
-import Iframe from 'react-iframe';
+// import Iframe from 'react-iframe';
 // import { useEffect, useState } from 'react';
 // // import { getSearchTitle } from 'services/api';
 // import { getDetails } from 'services/api';
