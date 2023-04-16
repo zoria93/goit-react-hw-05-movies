@@ -21,27 +21,27 @@ ${baseUrl}trending/movie/week?api_key=${KEY_API}&language=ru`);
   return Promise.reject(new Error(`error`));
 };
 
-export const getSearchMovies = async query => {
-  const response = await fetch(`
-       ${baseUrl}search/movie?api_key=${KEY_API}&language=ru&query=${query}&page=1&include_adult=false
-    `);
-  if (response.ok) {
-    const query = await response.json('');
-    return query;
-  }
-  return Promise.reject(new Error(`error`));
-};
+// export const getSearchMovies = async query => {
+//   const response = await fetch(`
+//        ${baseUrl}search/movie?api_key=${KEY_API}&language=ru&query=${query}&page=1&include_adult=false
+//     `);
+//   if (response.ok) {
+//     const query = await response.json('');
+//     return query;
+//   }
+//   return Promise.reject(new Error(`error`));
+// };
 
-export const getDetails = async movieId => {
-  const response = await fetch(
-    `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=ru`
-  );
-  if (response.ok) {
-    const movieDetails = await response.json('');
-    return movieDetails;
-  }
-  return Promise.reject(new Error(`error`));
-};
+// export const getDetails = async movieId => {
+//   const response = await fetch(
+//     `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=ru`
+//   );
+//   if (response.ok) {
+//     const movieDetails = await response.json('');
+//     return movieDetails;
+//   }
+//   return Promise.reject(new Error(`error`));
+// };
 
 export const getSearchTitle = async query => {
   const response = await fetch(`
@@ -54,16 +54,16 @@ export const getSearchTitle = async query => {
   return Promise.reject(new Error(`error`));
 };
 
-// export const getDetails = async movieId => {
-//   const response = await fetch(
-//     `${bazonUrl}search?token=${KEY_BAZON}&kp=${movieId}`
-//   );
-//   if (response.ok) {
-//     const movieDetails = await response.json('');
-//     return movieDetails;
-//   }
-//   return Promise.reject(new Error(`error`));
-// };
+export const getDetails = async movieId => {
+  const response = await fetch(
+    `${bazonUrl}search?token=${KEY_BAZON}&kp=${movieId}`
+  );
+  if (response.ok) {
+    const movieDetails = await response.json('');
+    return movieDetails;
+  }
+  return Promise.reject(new Error(`error`));
+};
 
 export const getCast = async movieId => {
   const responnse = await fetch(`

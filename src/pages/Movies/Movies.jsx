@@ -1,8 +1,10 @@
 import { useSearchParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getSearchMovies } from 'services/api';
+import { getSearchTitle } from 'services/api';
+// import { getSearchMovies } from 'services/api';
 import { SearchInput, Button } from 'pages/Movies/Movies.styled';
 import { Item, Text, List } from 'pages/Movies/Movies.styled';
+import { nanoid } from 'nanoid';
 
 const Movies = () => {
   const [name, setName] = useState('');
@@ -17,7 +19,7 @@ const Movies = () => {
     if (query === '') {
       return;
     }
-    getSearchMovies(query)
+    getSearchTitle(query)
       .then(listMovies => {
         if (listMovies.results.length === 0) {
           setValue(true);
@@ -52,28 +54,28 @@ const Movies = () => {
         <Button type="submit">Search</Button>
       </form>
       {movies.length > 0 && (
-        <ul>
-          {movies.map(({ title, id }) => {
-            return (
-              <List key={id}>
-                <Item to={`/movies/${id}`} state={{ from: location }}>
-                  {title}
-                </Item>
-              </List>
-            );
-          })}
-        </ul>
         // <ul>
-        //   {movies.map(({ kinopoisk_id, info: { ukr } }) => {
+        //   {movies.map(({ title, id }) => {
         //     return (
-        //       <List key={nanoid()}>
-        //         <Item to={`/movies/${kinopoisk_id}`} state={{ from: location }}>
-        //           {ukr}
+        //       <List key={id}>
+        //         <Item to={`/movies/${id}`} state={{ from: location }}>
+        //           {title}
         //         </Item>
         //       </List>
         //     );
         //   })}
         // </ul>
+        <ul>
+          {movies.map(({ kinopoisk_id, info: { rus } }) => {
+            return (
+              <List key={nanoid()}>
+                <Item to={`/movies/${kinopoisk_id}`} state={{ from: location }}>
+                  {rus}
+                </Item>
+              </List>
+            );
+          })}
+        </ul>
       )}
       {value && (
         <Text>There is no movies on your query! Please try again!</Text>

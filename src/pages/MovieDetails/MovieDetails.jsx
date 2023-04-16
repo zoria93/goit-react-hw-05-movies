@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Suspense } from 'react';
-import { useParams, Outlet, useLocation } from 'react-router-dom';
+// import { Suspense } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import { getDetails } from 'services/api';
-import { Loader } from 'components/Loader/Loader';
+// import { Loader } from 'components/Loader/Loader';
+import Iframe from 'react-iframe';
 import {
   Wrapper,
   Div,
-  Text,
+  // Text,
   Title,
   Button,
   TextBtn,
@@ -15,25 +16,30 @@ import {
   // TextLink,
   // Item,
 } from 'pages/MovieDetails/MovieDetails.styled';
-import { Link } from 'react-router-dom';
-import image from 'image/image.png';
+// import { Link } from 'react-router-dom';
+// import image from 'image/image.png';
 
 const MoviesDetails = ({ getName }) => {
   const [movies, setMovies] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
+  console.log(movies);
 
   useEffect(() => {
     getDetails(movieId)
-      .then(movieDetails => setMovies(movieDetails))
+      .then(movieDetails => setMovies(movieDetails.results[0]))
       .catch(error => console.log(error.message));
   }, [movieId]);
 
-  const { title, vote_average, overview, genres, poster_path } = movies ?? '';
-  const handleClik = () => {
-    getName(title);
-  };
+  // const { title, vote_average, overview, genres, poster_path } = movies ?? '';
+  // const handleClik = () => {
+  //   getName(title);
+  // };
+  const { rus, poster } = movies.info ?? '';
+  const { link } = movies;
+  // console.log(movies);
+
   return (
     <>
       <Button type="button">
@@ -41,7 +47,8 @@ const MoviesDetails = ({ getName }) => {
       </Button>
       <Wrapper>
         <ImgDiv>
-          <img
+          <img src={poster} alt="poster" width="300" loading="lazy" />
+          {/* <img
             src={
               poster_path
                 ? `https://image.tmdb.org/t/p/w300${poster_path}`
@@ -50,23 +57,32 @@ const MoviesDetails = ({ getName }) => {
             alt="poster"
             width="300"
             loading="lazy"
-          />
+          /> */}
         </ImgDiv>
 
         <Div>
-          <Title>{title}</Title>
-          <Text>User Score: {Math.round(vote_average * 10)}%</Text>
-          <h3>Overview</h3>
+          <Title>{rus}</Title>
+          <Iframe
+            src={link}
+            width="640px"
+            height="320px"
+            id=""
+            className=""
+            display="block"
+            position="relative"
+          />
+          {/* <Text>User Score: {Math.round(vote_average * 10)}%</Text> */}
+          {/* <h3>Overview</h3>
           <Text>{overview}</Text>
           <h3>Genres</h3>
           <Text>
             {genres?.length &&
               genres.map(({ id, name }) => <span key={id}>{name}, </span>)}
-          </Text>
+          </Text> */}
         </Div>
       </Wrapper>
       <div>
-        <ul>
+        {/* <ul>
           <li>
             <Link to={`player`} state={{ from: backLinkHref }}>
               <button type="click">Player One</button>
@@ -82,7 +98,7 @@ const MoviesDetails = ({ getName }) => {
         </ul>
         <Suspense fallback={<Loader />}>
           <Outlet />
-        </Suspense>
+        </Suspense> */}
       </div>
       {/* <List>
         <h4>Additional information</h4>
