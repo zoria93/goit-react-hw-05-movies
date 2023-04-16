@@ -25,7 +25,6 @@ const Player = ({ title }) => {
         height="320px"
         id=""
         className=""
-        allow="encrypted-media"
         display="block"
         position="relative"
       /> */}
@@ -33,7 +32,7 @@ const Player = ({ title }) => {
         src={`https://v1681499138.bazon.site/embed?search=${title}`}
         width="640"
         height="360"
-        allow="encrypted-media"
+        allow="autoplay; encrypted-media"
         title="iframe"
       ></iframe>
     </>
