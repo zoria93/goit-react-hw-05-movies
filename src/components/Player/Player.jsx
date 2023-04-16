@@ -19,24 +19,23 @@ const Player = ({ title }) => {
 
   return (
     <>
-      <Iframe
+      {/* <Iframe
         url={`https://v1681499138.bazon.site/embed?search=${title}`}
         width="640px"
         height="320px"
         id=""
         className=""
+        allow="encrypted-media"
         display="block"
         position="relative"
-      />
-      {/* <iframe
+      /> */}
+      <iframe
         src={`https://v1681499138.bazon.site/embed?search=${title}`}
-        frameborder="0"
-        allowfullscreen=""
-        referrerpolicy="origin"
-        width="800"
-        height="452"
+        width="640"
+        height="360"
+        allow="encrypted-media"
         title="iframe"
-      ></iframe> */}
+      ></iframe>
     </>
   );
 };
