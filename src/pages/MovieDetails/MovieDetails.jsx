@@ -62,15 +62,7 @@ const MoviesDetails = ({ getName }) => {
 
         <Div>
           <Title>{rus}</Title>
-          <Iframe
-            src={link}
-            width="640px"
-            height="320px"
-            id=""
-            className=""
-            display="block"
-            position="relative"
-          />
+
           {/* <Text>User Score: {Math.round(vote_average * 10)}%</Text> */}
           {/* <h3>Overview</h3>
           <Text>{overview}</Text>
@@ -99,6 +91,15 @@ const MoviesDetails = ({ getName }) => {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense> */}
+        <Iframe
+          src={link}
+          width="640px"
+          height="320px"
+          id=""
+          className=""
+          display="block"
+          position="relative"
+        />
       </div>
       {/* <List>
         <h4>Additional information</h4>
