@@ -21,16 +21,16 @@ ${baseUrl}trending/movie/week?api_key=${KEY_API}&language=ru`);
   return Promise.reject(new Error(`error`));
 };
 
-// export const getSearchMovies = async query => {
-//   const response = await fetch(`
-//        ${baseUrl}search/movie?api_key=${KEY_API}&language=ru&query=${query}&page=1&include_adult=false
-//     `);
-//   if (response.ok) {
-//     const query = await response.json('');
-//     return query;
-//   }
-//   return Promise.reject(new Error(`error`));
-// };
+export const getSearchMovies = async query => {
+  const response = await fetch(`
+       ${baseUrl}search/multi?api_key=${KEY_API}&language=en&query=${query}&page=1&include_adult=false
+    `);
+  if (response.ok) {
+    const query = await response.json('');
+    return query;
+  }
+  return Promise.reject(new Error(`error`));
+};
 
 // export const getDetails = async movieId => {
 //   const response = await fetch(

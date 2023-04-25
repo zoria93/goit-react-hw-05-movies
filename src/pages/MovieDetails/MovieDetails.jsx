@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import { Suspense } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { getDetails } from 'services/api';
+import { getDetails, getSearchMovies } from 'services/api';
 // import { Loader } from 'components/Loader/Loader';
 import Iframe from 'react-iframe';
 import {
@@ -17,15 +17,15 @@ import {
   // Item,
 } from 'pages/MovieDetails/MovieDetails.styled';
 // import { Link } from 'react-router-dom';
-// import image from 'image/image.png';
+import image from 'image/image.png';
 
 const MoviesDetails = ({ getName }) => {
   const [movies, setMovies] = useState([]);
+  const [name, setName] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
-  console.log(movies);
-
+  console.log(name);
   useEffect(() => {
     getDetails(movieId)
       .then(movieDetails => setMovies(movieDetails.results[0]))
@@ -36,9 +36,24 @@ const MoviesDetails = ({ getName }) => {
   // const handleClik = () => {
   //   getName(title);
   // };
-  const { rus, poster } = movies.info ?? '';
+  const { rus, orig } = movies.info ?? '';
   const { link } = movies;
-  // console.log(movies);
+
+  useEffect(() => {
+    if (orig === undefined) {
+      return;
+    }
+    getSearchMovies(orig)
+      .then(movieDetails => movieDetails.results)
+      .then(moviesName =>
+        setName(
+          moviesName.find(listName => listName.original_title.includes(orig))
+        )
+      )
+      .catch(error => console.log(error.message));
+  }, [orig]);
+
+  const { poster_path } = name ?? '';
 
   return (
     <>
@@ -47,8 +62,8 @@ const MoviesDetails = ({ getName }) => {
       </Button>
       <Wrapper>
         <ImgDiv>
-          <img src={poster} alt="poster" width="300" loading="lazy" />
-          {/* <img
+          {/* <img src={poster} alt="poster" width="300" loading="lazy" /> */}
+          <img
             src={
               poster_path
                 ? `https://image.tmdb.org/t/p/w300${poster_path}`
@@ -57,7 +72,7 @@ const MoviesDetails = ({ getName }) => {
             alt="poster"
             width="300"
             loading="lazy"
-          /> */}
+          />
         </ImgDiv>
 
         <Div>
