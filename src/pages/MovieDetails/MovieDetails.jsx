@@ -25,7 +25,7 @@ const MoviesDetails = ({ getName }) => {
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
-  console.log(name);
+
   useEffect(() => {
     getDetails(movieId)
       .then(movieDetails => setMovies(movieDetails.results[0]))
@@ -40,16 +40,22 @@ const MoviesDetails = ({ getName }) => {
   const { link } = movies;
 
   useEffect(() => {
-    if (orig === undefined) {
+    if (!orig) {
       return;
     }
     getSearchMovies(orig)
       .then(movieDetails => movieDetails.results)
-      .then(moviesName =>
+      .then(moviesName => {
         setName(
-          moviesName.find(listName => listName.original_title.includes(orig))
-        )
-      )
+          moviesName.find(listName => {
+            if (listName.media_type === 'tv') {
+              return listName.original_name.includes(orig);
+            }
+            return listName.original_title.includes(orig);
+          })
+        );
+      })
+
       .catch(error => console.log(error.message));
   }, [orig]);
 

@@ -23,7 +23,7 @@ ${baseUrl}trending/movie/week?api_key=${KEY_API}&language=ru`);
 
 export const getSearchMovies = async query => {
   const response = await fetch(`
-       ${baseUrl}search/multi?api_key=${KEY_API}&language=en&query=${query}&page=1&include_adult=false
+       ${baseUrl}search/multi?api_key=${KEY_API}&language=uk&query=${query}&page=1&include_adult=false
     `);
   if (response.ok) {
     const query = await response.json('');
