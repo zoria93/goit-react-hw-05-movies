@@ -19,12 +19,13 @@ import {
 // import { Link } from 'react-router-dom';
 import image from 'image/image.png';
 
-const MoviesDetails = ({ getName }) => {
+const MoviesDetails = () => {
   const [movies, setMovies] = useState([]);
-  const [name, setName] = useState([]);
+  const [name, setNames] = useState([]);
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
+  console.log(name);
 
   useEffect(() => {
     getDetails(movieId)
@@ -46,12 +47,12 @@ const MoviesDetails = ({ getName }) => {
     getSearchMovies(orig)
       .then(movieDetails => movieDetails.results)
       .then(moviesName => {
-        setName(
+        setNames(
           moviesName.find(listName => {
-            if (listName.media_type === 'tv') {
-              return listName.original_name.includes(orig);
+            if (listName.media_type === 'movie') {
+              return listName.original_title;
             }
-            return listName.original_title.includes(orig);
+            return listName.original_name;
           })
         );
       })

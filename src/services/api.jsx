@@ -23,7 +23,7 @@ ${baseUrl}trending/movie/week?api_key=${KEY_API}&language=ru`);
 
 export const getSearchMovies = async query => {
   const response = await fetch(`
-       ${baseUrl}search/multi?api_key=${KEY_API}&language=uk&query=${query}&page=1&include_adult=false
+       ${baseUrl}search/multi?api_key=${KEY_API}&language=en&query=${query}&page=1&include_adult=false
     `);
   if (response.ok) {
     const query = await response.json('');
@@ -83,6 +83,19 @@ ${baseUrl}movie/${movieId}/reviews?api_key=${KEY_API}&language=uk
   if (responnse.ok) {
     const reviews = await responnse.json('');
     return reviews;
+  }
+  return Promise.reject(new Error(`error`));
+};
+// bazon.cc/api/json?token=c69778ce88918520e7adb0dc758dbe37&type=all&page=1
+const page = 1;
+
+export const getListMovies = async () => {
+  const response = await fetch(
+    `${bazonUrl}json?token=${KEY_BAZON}&type=film&page=${page}&year=2023`
+  );
+  if (response.ok) {
+    const movieDetails = await response.json('');
+    return movieDetails;
   }
   return Promise.reject(new Error(`error`));
 };
