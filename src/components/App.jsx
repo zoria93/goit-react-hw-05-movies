@@ -4,6 +4,7 @@ import SharedLayout from 'components/SharedLayout/SharedLayout';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Movies = lazy(() => import('pages/Movies/Movies'));
+const Films = lazy(() => import('pages/Fims/Films'));
 const MoviesDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 const Player = lazy(() => import('components/Player/Player'));
 const PlayerTwo = lazy(() => import('components/PlayerTwo/PlayerTwo'));
@@ -26,6 +27,7 @@ export const App = () => {
           path="movies/:movieId"
           element={<MoviesDetails getName={getName} />}
         >
+          <Route path="films/:movieId" element={<Films />} />
           <Route path="player" element={<Player title={nameMovie} />} />
           <Route path="playerTwo" element={<PlayerTwo title={nameMovie} />} />
           <Route path="cast" element={<Cast />} />

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-import { getListMovies } from 'services/api';
+import { getTrending } from 'services/api';
 import { Title, List, Item } from './Home.styled';
+import image from 'image/image.png';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -9,7 +10,7 @@ const Home = () => {
   // console.log(movies);
 
   useEffect(() => {
-    getListMovies()
+    getTrending()
       .then(listMovies => setMovies(listMovies.results))
       .catch(error => console.log(error.message));
   }, []);
@@ -31,10 +32,22 @@ const Home = () => {
     <div>
       <Title>Trending today</Title>
       <ul>
-        {movies.map(({ info: { rus }, kinopoisk_id }) => {
+        {movies.map(({ title, id, poster_path }) => {
           return (
             <List key={nanoid()}>
-              <Item to={`/movies/${kinopoisk_id}`}>{rus}</Item>
+              <Item to={`/films/${id}`}>
+                <img
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w300${poster_path}`
+                      : `${image}`
+                  }
+                  alt="poster"
+                  width="200"
+                  loading="lazy"
+                />
+                {title}
+              </Item>
             </List>
           );
         })}
