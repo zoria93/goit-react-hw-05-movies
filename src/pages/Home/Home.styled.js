@@ -5,14 +5,27 @@ export const Title = styled.h1`
   margin-bottom: 15px;
 `;
 
+export const Ul = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
 export const List = styled.li`
   margin-top: 10px;
+`;
+
+export const Span = styled.span`
+  display: block;
+  max-width: 293px;
+  font-size: 18px;
 `;
 
 export const Item = styled(Link)`
   color: black;
   color: inherit;
   font-size: 15px;
+
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 250ms cubic-bezier(0.4, 0, 0.2, 1),

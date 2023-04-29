@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { getTrending } from 'services/api';
-import { Title, List, Item } from './Home.styled';
+import { Title, List, Item, Ul, Span } from './Home.styled';
 import image from 'image/image.png';
 
 const Home = () => {
@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div>
       <Title>Trending today</Title>
-      <ul>
+      <Ul>
         {movies.map(({ title, id, poster_path }) => {
           return (
             <List key={nanoid()}>
@@ -43,15 +43,15 @@ const Home = () => {
                       : `${image}`
                   }
                   alt="poster"
-                  width="200"
+                  width="293"
                   loading="lazy"
                 />
-                {title}
+                <Span>{title}</Span>
               </Item>
             </List>
           );
         })}
-      </ul>
+      </Ul>
     </div>
   );
 };

@@ -32,16 +32,16 @@ export const getSearchMovies = async query => {
   return Promise.reject(new Error(`error`));
 };
 
-// export const getDetails = async movieId => {
-//   const response = await fetch(
-//     `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=ru`
-//   );
-//   if (response.ok) {
-//     const movieDetails = await response.json('');
-//     return movieDetails;
-//   }
-//   return Promise.reject(new Error(`error`));
-// };
+export const getDetailsFilms = async movieId => {
+  const response = await fetch(
+    `${baseUrl}movie/${movieId}?api_key=${KEY_API}&language=ru`
+  );
+  if (response.ok) {
+    const movieDetails = await response.json('');
+    return movieDetails;
+  }
+  return Promise.reject(new Error(`error`));
+};
 
 export const getSearchTitle = async query => {
   const response = await fetch(`
