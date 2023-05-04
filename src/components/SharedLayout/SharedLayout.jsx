@@ -19,9 +19,6 @@ const SharedLayout = () => {
             <li>
               <Link to="/movies">Movies</Link>
             </li>
-            {/* <li>
-              <Link to="/films">Films</Link>
-            </li> */}
           </NavList>
         </nav>
       </Header>

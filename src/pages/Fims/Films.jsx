@@ -7,9 +7,9 @@ import { useParams } from 'react-router-dom';
 const Films = () => {
   const [movies, setMovies] = useState([]);
   const [nameTitle, setNameTitle] = useState([]);
-  const [loading, setLoading] = useState(false);
+  console.log(nameTitle);
+
   const { movieId } = useParams();
-  console.log(loading);
 
   useEffect(() => {
     getDetailsFilms(movieId)
@@ -17,29 +17,23 @@ const Films = () => {
       .catch(error => console.log(error.message));
   }, [movieId]);
 
-  const { original_title, title } = movies ?? '';
+  const { original_title } = movies ?? '';
 
   useEffect(() => {
-    if (movies.length === 0) {
+    if (!original_title) {
       return;
     }
-    getSearchTitle(loading ? title : original_title)
-      .then(movieDetails => {
-        if (movieDetails.results[0]) {
-          console.log(movieDetails.results[0]);
-          setLoading(false);
-        }
-        return setNameTitle(movieDetails.results[0]);
-      })
+    getSearchTitle(original_title)
+      .then(movieDetails => setNameTitle(movieDetails.results[0]))
 
       .catch(error => console.log(error.message));
-  }, [loading, movies.length, nameTitle.length, original_title, title]);
+  }, [movies.length, original_title]);
   const { link } = nameTitle ?? '';
 
   return (
     <>
       {/* <Iframe
-        url={`https://v1681499138.bazon.site/embed?search=${title}`}
+        src={link}
         width="640px"
         height="320px"
         id=""
