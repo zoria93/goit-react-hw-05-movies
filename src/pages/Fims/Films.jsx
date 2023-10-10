@@ -17,17 +17,26 @@ const Films = () => {
       .catch(error => console.log(error.message));
   }, [movieId]);
 
-  const { original_title } = movies ?? '';
+  const { original_title, title } = movies ?? '';
 
   useEffect(() => {
     if (!original_title) {
       return;
     }
-    getSearchTitle(original_title)
-      .then(movieDetails => setNameTitle(movieDetails.results[0]))
+    if (nameTitle.length !== 0) {
+      getSearchTitle(original_title)
+        .then(movieDetails => setNameTitle(movieDetails.results[0]))
 
-      .catch(error => console.log(error.message));
-  }, [movies.length, original_title]);
+        .catch(error => console.log(error.message));
+    }
+    if (nameTitle.length === 0) {
+      getSearchTitle(title)
+        .then(movieDetails => setNameTitle(movieDetails.results[0]))
+
+        .catch(error => console.log(error.message));
+    }
+  }, [movies.length, nameTitle.length, original_title, title]);
+
   const { link } = nameTitle ?? '';
 
   return (
